@@ -12,6 +12,11 @@ int main()
 	while (true)
 	{
 		//TODO: Check for input
+		sf::Event gameEvent;
+		while (gameWindow.pollEvent(gameEvent))
+		{
+			//TODO: Process Events
+		}
 
 		//TODO: Update game state
 
