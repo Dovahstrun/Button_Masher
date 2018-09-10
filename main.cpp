@@ -44,7 +44,12 @@ int main()
 	sf::Text titleText; //Create a variable to store the text
 	titleText.setFont(gameFont); //Set a font for the text using the variable storing the font
 	titleText.setString("Button Masher!"); //Set the text
-	titleText.setPosition(gameWindow.getSize().x / 2 - titleText.getLocalBounds().width / 2, 30);
+
+	//Initialise values for the text
+	titleText.setCharacterSize(48); //Set the size of the text
+	titleText.setFillColor(sf::Color::Cyan); //Set the colour of the text
+	titleText.setStyle(sf::Text::Bold | sf::Text::Italic);
+	titleText.setPosition(gameWindow.getSize().x / 2 - titleText.getLocalBounds().width / 2, 30);//Set the position of the text
 
 	///-------------------------------------------------
 	///Game Loop
