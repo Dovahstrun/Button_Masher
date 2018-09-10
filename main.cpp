@@ -1,6 +1,7 @@
 //Included libraries
 #include <sfml/Graphics.hpp> //Includes graphics
 #include <SFML/Audio.hpp> //Includes audio
+#include <string> //Include strings
 
 //Entry point for program
 int main()
@@ -57,11 +58,28 @@ int main()
 	authorText.setString("By Craig Fletcher"); //Set the text
 
 	//Format author text
-authorText.setStyle(sf::Text::Underlined | sf::Text::Italic);
 	authorText.setCharacterSize(24);
 	authorText.setFillColor(sf::Color::Cyan);
-	
+	authorText.setStyle(sf::Text::Italic | sf::Text::Underlined);
 	authorText.setPosition(gameWindow.getSize().x / 2 - authorText.getLocalBounds().width / 2, gameWindow.getSize().y - 100); //Set the position of the text
+
+	//Create and format score variable text
+	int score = 0;
+	sf::Text scoreText;
+	scoreText.setFont(gameFont);
+	scoreText.setString("Score: " + std::to_string(score));
+	scoreText.setCharacterSize(16);
+	scoreText.setFillColor(sf::Color::White);
+	scoreText.setPosition(30, 30);
+
+	//Create and format timer text
+	int timer = 0;
+	sf::Text timerText;
+	timerText.setFont(gameFont);
+	timerText.setString("Timer: " + std::to_string(timer));
+	timerText.setCharacterSize(16);
+	timerText.setFillColor(sf::Color::White);
+	timerText.setPosition(gameWindow.getSize().x - timerText.getLocalBounds().width - 30, 30);
 
 	///-------------------------------------------------
 	///Game Loop
@@ -88,6 +106,8 @@ authorText.setStyle(sf::Text::Underlined | sf::Text::Italic);
 		///Update game state
 		///-----------------------------------------------------
 
+		scoreText.setString("Score: " + std::to_string(score));
+
 		///---------------------------------------------
 		///Draw graphics
 		///---------------------------------------------
@@ -99,6 +119,8 @@ authorText.setStyle(sf::Text::Underlined | sf::Text::Italic);
 		gameWindow.draw(buttonSprite);
 		gameWindow.draw(titleText);
 		gameWindow.draw(authorText);
+		gameWindow.draw(scoreText);
+		gameWindow.draw(timerText);
 
 		//Display the window contents on the screen
 		gameWindow.display();
