@@ -1,5 +1,6 @@
 //Included libraries
-#include <sfml/Graphics.hpp>
+#include <sfml/Graphics.hpp> //Includes graphics
+#include <SFML/Audio.hpp> //Includes audio
 
 //Entry point for program
 int main()
@@ -8,10 +9,39 @@ int main()
 	sf::RenderWindow gameWindow;
 	gameWindow.create(sf::VideoMode::getDesktopMode(), "Button Masher", sf::Style::Titlebar | sf::Style::Close);
 
-	//Game Loop
+	///-------------------------------------------------
+	///SETUP
+	///-------------------------------------------------
+
+	///Sprites
+
+	//Create a varible to hold the texture
+	sf::Texture buttonTexture;
+	buttonTexture.loadFromFile("graphics/button.png");
+
+	//Create a sprite variable
+	sf::Sprite buttonSprite;
+	buttonSprite.setTexture(buttonTexture);
+
+	//Set the position of the sprite
+	buttonSprite.setPosition(gameWindow.getSize().x / 2 - buttonTexture.getSize().x / 2, gameWindow.getSize().y / 2 - buttonTexture.getSize().y / 2);
+
+
+	///Audio
+
+	//Create a music variable, load in the music file and play it
+	sf::Music gameMusic;
+	gameMusic.openFromFile("audio/music.ogg");
+	gameMusic.play();
+
+	///-------------------------------------------------
+	///Game Loop
+	///-------------------------------------------------
 	while (gameWindow.isOpen()) //Runs every frame until the game window is closed
 	{
-		//TODO: Check for input
+		///---------------------------------------------
+		///Check for input
+		///---------------------------------------------
 		sf::Event gameEvent;
 		while (gameWindow.pollEvent(gameEvent))
 		{
@@ -25,9 +55,22 @@ int main()
 			}
 		}
 
-		//TODO: Update game state
+		///---------------------------------------------
+		///Update game state
+		///-----------------------------------------------------
 
-		//TODO: Draw graphics
+		///---------------------------------------------
+		///Draw graphics
+		///---------------------------------------------
+
+		//Clear the window to a single colour
+		gameWindow.clear(sf::Color::Black);
+
+		//Draw everything to the window
+		gameWindow.draw(buttonSprite);
+
+		//Display the window contents on the screen
+		gameWindow.display();
 	}
 	//Exit point for program
 	return 0;
