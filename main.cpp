@@ -40,16 +40,28 @@ int main()
 	sf::Font gameFont;
 	gameFont.loadFromFile("fonts/mainFont.ttf");
 
-	//Create the text
+	//Create the title text
 	sf::Text titleText; //Create a variable to store the text
 	titleText.setFont(gameFont); //Set a font for the text using the variable storing the font
 	titleText.setString("Button Masher!"); //Set the text
 
-	//Initialise values for the text
+	//Format the title text
 	titleText.setCharacterSize(48); //Set the size of the text
 	titleText.setFillColor(sf::Color::Cyan); //Set the colour of the text
 	titleText.setStyle(sf::Text::Bold | sf::Text::Italic);
 	titleText.setPosition(gameWindow.getSize().x / 2 - titleText.getLocalBounds().width / 2, 30);//Set the position of the text
+
+	//Create the author text
+	sf::Text authorText; //Create a variable to store the text
+	authorText.setFont(gameFont); //Set a font for the text using the variable storing the font
+	authorText.setString("By Craig Fletcher"); //Set the text
+
+	//Format author text
+authorText.setStyle(sf::Text::Underlined | sf::Text::Italic);
+	authorText.setCharacterSize(24);
+	authorText.setFillColor(sf::Color::Cyan);
+	
+	authorText.setPosition(gameWindow.getSize().x / 2 - authorText.getLocalBounds().width / 2, gameWindow.getSize().y - 100); //Set the position of the text
 
 	///-------------------------------------------------
 	///Game Loop
@@ -86,6 +98,7 @@ int main()
 		//Draw everything to the window
 		gameWindow.draw(buttonSprite);
 		gameWindow.draw(titleText);
+		gameWindow.draw(authorText);
 
 		//Display the window contents on the screen
 		gameWindow.display();
