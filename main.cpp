@@ -34,6 +34,18 @@ int main()
 	gameMusic.openFromFile("audio/music.ogg");
 	gameMusic.play();
 
+	///Fonts/Text
+	
+	//Set up a font and load it in
+	sf::Font gameFont;
+	gameFont.loadFromFile("fonts/mainFont.ttf");
+
+	//Create the text
+	sf::Text titleText; //Create a variable to store the text
+	titleText.setFont(gameFont); //Set a font for the text using the variable storing the font
+	titleText.setString("Button Masher!"); //Set the text
+	titleText.setPosition(gameWindow.getSize().x / 2 - titleText.getLocalBounds().width / 2, 30);
+
 	///-------------------------------------------------
 	///Game Loop
 	///-------------------------------------------------
