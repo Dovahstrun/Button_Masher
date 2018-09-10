@@ -63,7 +63,7 @@ int main()
 	authorText.setStyle(sf::Text::Italic | sf::Text::Underlined);
 	authorText.setPosition(gameWindow.getSize().x / 2 - authorText.getLocalBounds().width / 2, gameWindow.getSize().y - 100); //Set the position of the text
 
-	//Create and format score variable text
+	//Create and format score variable and text
 	int score = 0;
 	sf::Text scoreText;
 	scoreText.setFont(gameFont);
@@ -73,13 +73,17 @@ int main()
 	scoreText.setPosition(30, 30);
 
 	//Create and format timer text
-	int timer = 0;
 	sf::Text timerText;
 	timerText.setFont(gameFont);
-	timerText.setString("Timer: " + std::to_string(timer));
+	timerText.setString("Timer: 0");
 	timerText.setCharacterSize(16);
 	timerText.setFillColor(sf::Color::White);
 	timerText.setPosition(gameWindow.getSize().x - timerText.getLocalBounds().width - 30, 30);
+
+	//Create tme variable
+	sf::Time timeLimit = sf::seconds(10.0f);
+	sf::Time timeRemaining = timeLimit;
+	sf::Clock gameClock;
 
 	///-------------------------------------------------
 	///Game Loop
