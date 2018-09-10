@@ -80,6 +80,7 @@ int main()
 
 		//Draw everything to the window
 		gameWindow.draw(buttonSprite);
+		gameWindow.draw(titleText);
 
 		//Display the window contents on the screen
 		gameWindow.display();
