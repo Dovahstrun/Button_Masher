@@ -33,7 +33,7 @@ int main()
 	//Create a music variable, load in the music file and play it
 	sf::Music gameMusic;
 	gameMusic.openFromFile("audio/music.ogg");
-	gameMusic.play();
+	//gameMusic.play();
 
 	//Create a sound effect for clicking on the button
 	sf::SoundBuffer clickBuffer;
@@ -91,6 +91,10 @@ int main()
 	sf::Time timeRemaining = timeLimit;
 	sf::Clock gameClock;
 
+	///Separate variables
+
+	bool playing = false;
+
 	///-------------------------------------------------
 	///Game Loop
 	///-------------------------------------------------
@@ -109,7 +113,14 @@ int main()
 			{
 				if (buttonSprite.getGlobalBounds().contains(gameEvent.mouseButton.x, gameEvent.mouseButton.y))
 				{
-					score += 1;
+					if (playing == true)
+					{
+						score += 1;
+					}
+					else
+					{
+						playing = true;
+					}
 					clickSound.play();
 				}
 			}
@@ -127,7 +138,12 @@ int main()
 		///-----------------------------------------------------
 
 		sf::Time frameTime = gameClock.restart();
-		timeRemaining -= frameTime;
+		if (playing == true)
+		{
+			timeRemaining -= frameTime;
+			if (timeRemaining.asSeconds() <= 0)
+				playing = false;
+		}	
 		timerText.setString("Time Remaining: " + std::to_string((int)timeRemaining.asSeconds()));
 
 		scoreText.setString("Score: " + std::to_string(score));
