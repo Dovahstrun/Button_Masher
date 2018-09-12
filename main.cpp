@@ -41,6 +41,12 @@ int main()
 	sf::Sound clickSound;
 	clickSound.setBuffer(clickBuffer);
 
+	//Create a sound effect for gameover
+	sf::SoundBuffer gameOverBuffer;
+	gameOverBuffer.loadFromFile("audio/gameover.ogg");
+	sf::Sound gameOverSound;
+	gameOverSound.setBuffer(gameOverBuffer);
+
 	///Fonts/Text
 	
 	//Set up a font and load it in
@@ -86,7 +92,17 @@ int main()
 	timerText.setFillColor(sf::Color::White);
 	timerText.setPosition(gameWindow.getSize().x - timerText.getLocalBounds().width - 30, 30);
 
-	//Create tme variable
+	//Create and format text to prompt player to start
+	sf::Text promptText;
+	promptText.setFont(gameFont);
+	promptText.setString("Click the button to start the game!");
+	promptText.setCharacterSize(16);
+	promptText.setFillColor(sf::Color::Green);
+	promptText.setPosition(gameWindow.getSize().x / 2 - promptText.getLocalBounds().width / 2, 200);
+
+	///Time
+
+	//Create time variable
 	sf::Time timeLimit = sf::seconds(10.0f);
 	sf::Time timeRemaining = timeLimit;
 	sf::Clock gameClock;
@@ -120,6 +136,9 @@ int main()
 					else
 					{
 						playing = true;
+						score = 0;
+						timeRemaining = timeLimit;
+						promptText.setString("Click the button as fast as you can!");
 					}
 					clickSound.play();
 				}
@@ -142,7 +161,11 @@ int main()
 		{
 			timeRemaining -= frameTime;
 			if (timeRemaining.asSeconds() <= 0)
+			{
 				playing = false;
+				promptText.setString("Your final score was: " + std::to_string((int)timeRemaining.asSeconds()) + ". Click the button to start a new game!");
+				gameOverSound.play();
+			}
 		}	
 		timerText.setString("Time Remaining: " + std::to_string((int)timeRemaining.asSeconds()));
 
@@ -161,6 +184,7 @@ int main()
 		gameWindow.draw(authorText);
 		gameWindow.draw(scoreText);
 		gameWindow.draw(timerText);
+		gameWindow.draw(promptText);
 
 		//Display the window contents on the screen
 		gameWindow.display();
