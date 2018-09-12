@@ -110,6 +110,7 @@ int main()
 				if (buttonSprite.getGlobalBounds().contains(gameEvent.mouseButton.x, gameEvent.mouseButton.y))
 				{
 					score += 1;
+					clickSound.play();
 				}
 			}
 
