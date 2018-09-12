@@ -46,6 +46,13 @@ int main()
 	gameOverBuffer.loadFromFile("audio/gameover.ogg");
 	sf::Sound gameOverSound;
 	gameOverSound.setBuffer(gameOverBuffer);
+	gameOverSound.play();
+
+	//Sound effect for clicking outside of the button
+	sf::SoundBuffer nonButtonClickBuffer;
+	nonButtonClickBuffer.loadFromFile("audio/Wilhelm.ogg");
+	sf::Sound wrongClick;
+	wrongClick.setBuffer(nonButtonClickBuffer);
 
 	///Fonts/Text
 	
@@ -141,6 +148,10 @@ int main()
 						promptText.setString("Click the button as fast as you can!");
 					}
 					clickSound.play();
+				}
+				else
+				{
+					wrongClick.play();
 				}
 			}
 
