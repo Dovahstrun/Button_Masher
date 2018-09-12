@@ -36,6 +36,10 @@ int main()
 	gameMusic.play();
 
 	//Create a sound effect for clicking on the button
+	sf::SoundBuffer clickBuffer;
+	clickBuffer.loadFromFile("audio/buttonclick.ogg");
+	sf::Sound clickSound;
+	clickSound.setBuffer(clickBuffer);
 
 	///Fonts/Text
 	
