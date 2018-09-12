@@ -35,6 +35,8 @@ int main()
 	gameMusic.openFromFile("audio/music.ogg");
 	gameMusic.play();
 
+	//Create a sound effect for clicking on the button
+
 	///Fonts/Text
 	
 	//Set up a font and load it in
@@ -75,7 +77,7 @@ int main()
 	//Create and format timer text
 	sf::Text timerText;
 	timerText.setFont(gameFont);
-	timerText.setString("Timer: 0");
+	timerText.setString("Time Remaining: 0");
 	timerText.setCharacterSize(16);
 	timerText.setFillColor(sf::Color::White);
 	timerText.setPosition(gameWindow.getSize().x - timerText.getLocalBounds().width - 30, 30);
@@ -98,6 +100,15 @@ int main()
 		{
 			//Process Events
 
+			//Check if event is a mouse button pressed
+			if (gameEvent.type == sf::Event::MouseButtonPressed)
+			{
+				if (buttonSprite.getGlobalBounds().contains(gameEvent.mouseButton.x, gameEvent.mouseButton.y))
+				{
+					score += 1;
+				}
+			}
+
 			//Check if the event is the closed event
 			if (gameEvent.type == sf::Event::Closed)
 			{
@@ -109,6 +120,10 @@ int main()
 		///---------------------------------------------
 		///Update game state
 		///-----------------------------------------------------
+
+		sf::Time frameTime = gameClock.restart();
+		timeRemaining -= frameTime;
+		timerText.setString("Time Remaining: " + std::to_string((int)timeRemaining.asSeconds()));
 
 		scoreText.setString("Score: " + std::to_string(score));
 
